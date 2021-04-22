@@ -60,7 +60,7 @@ Feel free to submitting pull requests to us.
 
 ## Authors
 
-* **Anderson Xavier** - *Initial work* - [Twitter](https://github.com/andersonlx)
+* **Anderson Xavier** - *Initial work* - [Github](https://github.com/andersonlx)
 
 
 ## Acknowledgments
