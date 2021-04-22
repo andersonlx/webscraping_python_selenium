@@ -9,10 +9,11 @@ import json
 
 # Grab content from URL (Pegar conteúdo HTML a partir da URL)
 url = "https://stats.nba.com/players/traditional/?PerMode=Totals&Season=2019-20&SeasonType=Regular%20Season&sort=PLAYER_NAME&dir=-1"
+#url = "https://www.nba.com/stats/players/traditional/?sort=PTS&dir=-1"
 top10ranking = {}
 
 rankings = {
-    '3points': {'field': 'FG3M', 'label': '3PM'},
+    '3points': {'field': 'FGM', 'label': '3PM'},
     'points': {'field': 'PTS', 'label': 'PTS'},
     'assistants': {'field': 'AST', 'label': 'AST'},
     'rebounds': {'field': 'REB', 'label': 'REB'},
@@ -25,9 +26,9 @@ def buildrank(type):
 
     field = rankings[type]['field']
     label = rankings[type]['label']
-
+          
     driver.find_element_by_xpath(
-        f"//div[@class='nba-stat-table']//table//thead//tr//th[@data-field='{field}']").click()
+        f"//div[@class='nba-stat-table']//div//table//thead//tr//th[@data-field='{field}']").click()
 
     element = driver.find_element_by_xpath(
         "//div[@class='nba-stat-table']//table")
@@ -48,10 +49,14 @@ def buildrank(type):
 
 option = Options()
 option.headless = True
-driver = webdriver.Firefox(options=option)
+#driver = webdriver.Firefox(options=option)
+driver = webdriver.Firefox()
 
 driver.get(url)
 driver.implicitly_wait(10)  # in seconds
+
+driver.find_element_by_xpath(
+        "//div[@class='ot-sdk-container']//div//div//div//button[@id='onetrust-accept-btn-handler']").click()
 
 for k in rankings:
     top10ranking[k] = buildrank(k)
